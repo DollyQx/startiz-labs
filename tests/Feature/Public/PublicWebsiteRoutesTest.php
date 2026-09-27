@@ -104,4 +104,15 @@ class PublicWebsiteRoutesTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('OK');
     }
+
+    public function test_https_url_generation_and_reverse_proxy_trust(): void
+    {
+        $response = $this->withHeaders([
+            'X-Forwarded-Proto' => 'https',
+            'X-Forwarded-Port' => '443',
+        ])->get('/');
+
+        $response->assertStatus(200);
+        $this->assertStringStartsWith('https://', asset('css/public.css'));
+    }
 }
