@@ -5,50 +5,144 @@
 
 @section('content')
     <!-- 1. HERO SECTION -->
-    <section class="relative bg-slate-900 text-white pt-16 pb-24 lg:pt-24 lg:pb-32 overflow-hidden border-b border-slate-800">
-        <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40 pointer-events-none"></div>
+    <section class="relative bg-slate-950 text-white pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden border-b border-slate-800/80">
+        <!-- Subtle Background Glows -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-subtle"></div>
+        <div class="absolute top-1/2 -right-24 w-96 h-96 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none animate-pulse-subtle"></div>
+
         <div class="container-custom relative z-10">
-            <div class="max-w-4xl mx-auto text-center">
-                <span class="badge-public mb-6 inline-block bg-blue-950 text-blue-400 border border-blue-800/60 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-                    One Place for Your Complete Digital Business Solution
-                </span>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                 
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-8">
-                    Build Websites, Mobile Apps & AI Automation for Your Business
-                </h1>
-                
-                <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Startiz Labs provides digital solutions in one place for startups, retailers, restaurants, coaching institutes, and organizations requiring modern technology.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                    <a href="{{ route('start-project') }}" class="btn-base btn-primary btn-lg w-full sm:w-auto">
-                        Start Your Project
-                    </a>
-                    <a href="{{ route('portfolio.index') }}" class="btn-base btn-outline btn-lg w-full sm:w-auto text-white border-slate-700 hover:bg-slate-800">
-                        View Past Work
-                    </a>
+                <!-- Left Column: Friendly & Direct Business Messaging -->
+                <div class="lg:col-span-6 text-left">
+                    <!-- Eyebrow Badge -->
+                    <div class="inline-flex items-center gap-2.5 bg-slate-900/90 border border-blue-500/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-blue-400 mb-6 shadow-inner">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        </span>
+                        <span class="uppercase text-[11px] tracking-widest font-bold">DIGITAL SOLUTIONS FOR YOUR BUSINESS</span>
+                    </div>
+
+                    <!-- Headline -->
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white tracking-tight leading-[1.18] mb-6">
+                        Aapke Business Ko <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">Digital Banane Ka Kaam,</span> Humara.
+                    </h1>
+
+                    <!-- Supporting Paragraph -->
+                    <p class="text-base sm:text-lg text-slate-300 max-w-xl mb-8 leading-relaxed font-normal">
+                        Website, mobile app, online store, CRM, AI automation ya custom software. Aapke business ki need ke hisaab se simple, practical aur scalable digital solutions.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-10">
+                        <a href="{{ route('start-project') }}" class="btn-base btn-primary btn-lg justify-center shadow-lg shadow-blue-600/20 group">
+                            <span>Start Your Project</span>
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            </svg>
+                        </a>
+                        <a href="{{ route('portfolio.index') }}" class="btn-base btn-outline btn-lg justify-center !text-white border-slate-700/80 hover:bg-slate-800/80 hover:!text-white transition-all">
+                            View Our Work
+                        </a>
+                    </div>
+
+                    <!-- Quick Audience Badges -->
+                    <div class="pt-6 border-t border-slate-800/80 flex flex-wrap gap-2 text-xs text-slate-300">
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800">Startups & Founders</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800">Shops & Retailers</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800">Restaurants & Food</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-800">Institutes & Coaching</span>
+                    </div>
                 </div>
 
-                <!-- Core Capabilities Pills -->
-                <div class="pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                    <div class="flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        Website & Mobile Apps
-                    </div>
-                    <div class="flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        AI & Automation
-                    </div>
-                    <div class="flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        Custom CRM & ERP
-                    </div>
-                    <div class="flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                        Retail & Institute Tech
+                <!-- Right Column: Business Digital Ecosystem Visual -->
+                <div class="lg:col-span-6 relative mt-8 lg:mt-0">
+                    <div class="relative mx-auto max-w-md lg:max-w-none min-h-[380px] flex items-center justify-center p-4">
+                        
+                        <!-- Connecting Radial Ring -->
+                        <div class="absolute inset-4 rounded-full border border-dashed border-slate-800 pointer-events-none"></div>
+
+                        <!-- Central Core: YOUR BUSINESS -->
+                        <div class="relative z-10 bg-gradient-to-br from-blue-600 to-indigo-700 text-white rounded-2xl p-6 shadow-2xl shadow-blue-900/50 border border-blue-400/30 text-center w-48">
+                            <div class="w-12 h-12 rounded-xl bg-white/10 mx-auto mb-3 flex items-center justify-center border border-white/20">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0h4m-4 0H9m4 0V7m0 0h4m-4 0H9"/>
+                                </svg>
+                            </div>
+                            <div class="font-extrabold text-sm uppercase tracking-wider">YOUR BUSINESS</div>
+                            <div class="text-[10px] text-blue-100/80 mt-1">Growth Ecosystem</div>
+                        </div>
+
+                        <!-- Solution Card 1: Website (Top Left) -->
+                        <div class="absolute top-0 left-0 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3 shadow-lg flex items-center gap-3 w-40 sm:w-44 animate-float-slow">
+                            <div class="p-2 rounded-lg bg-blue-500/10 text-blue-400 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-xs text-white">Website</div>
+                                <div class="text-[10px] text-slate-400">High Converting</div>
+                            </div>
+                        </div>
+
+                        <!-- Solution Card 2: Mobile App (Top Right) -->
+                        <div class="absolute top-0 right-0 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3 shadow-lg flex items-center gap-3 w-40 sm:w-44 animate-float-delayed">
+                            <div class="p-2 rounded-lg bg-indigo-500/10 text-indigo-400 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-xs text-white">Mobile App</div>
+                                <div class="text-[10px] text-slate-400">Android & iOS</div>
+                            </div>
+                        </div>
+
+                        <!-- Solution Card 3: Online Store (Middle Left) -->
+                        <div class="absolute top-1/2 -translate-y-1/2 -left-4 sm:left-0 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3 shadow-lg flex items-center gap-3 w-40 sm:w-44">
+                            <div class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-xs text-white">Online Store</div>
+                                <div class="text-[10px] text-slate-400">E-Commerce</div>
+                            </div>
+                        </div>
+
+                        <!-- Solution Card 4: AI Automation (Middle Right) -->
+                        <div class="absolute top-1/2 -translate-y-1/2 -right-4 sm:right-0 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3 shadow-lg flex items-center gap-3 w-40 sm:w-44">
+                            <div class="p-2 rounded-lg bg-amber-500/10 text-amber-400 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-xs text-white">AI Automation</div>
+                                <div class="text-[10px] text-slate-400">Smart Workflows</div>
+                            </div>
+                        </div>
+
+                        <!-- Solution Card 5: CRM System (Bottom Left) -->
+                        <div class="absolute bottom-0 left-0 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3 shadow-lg flex items-center gap-3 w-40 sm:w-44 animate-float-delayed">
+                            <div class="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-xs text-white">CRM</div>
+                                <div class="text-[10px] text-slate-400">Client & Sales</div>
+                            </div>
+                        </div>
+
+                        <!-- Solution Card 6: Business Management (Bottom Right) -->
+                        <div class="absolute bottom-0 right-0 bg-slate-900/90 backdrop-blur-md border border-slate-800 rounded-xl p-3 shadow-lg flex items-center gap-3 w-40 sm:w-44 animate-float-slow">
+                            <div class="p-2 rounded-lg bg-purple-500/10 text-purple-400 shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-xs text-white">Business Software</div>
+                                <div class="text-[10px] text-slate-400">Billing & ERP</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
