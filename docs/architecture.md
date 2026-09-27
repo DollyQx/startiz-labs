@@ -1,8 +1,8 @@
-# GM Code Lab — Technical & System Architecture
+# Startiz Labs — Technical & System Architecture
 
 ## 1. Executive Summary
 
-This document outlines the system architecture for the **GM Code Lab** enterprise platform. The architecture is designed to be **modular, secure, performant, and scalable** while remaining fully compatible with standard PHP/MySQL environments such as **Hostinger shared hosting**.
+This document outlines the system architecture for the **Startiz Labs** enterprise platform. The architecture is designed to be **modular, secure, performant, and scalable** while remaining fully compatible with standard PHP/MySQL environments such as **Hostinger shared hosting**.
 
 ---
 
