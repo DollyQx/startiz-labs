@@ -1,0 +1,40 @@
+0000000000000000000000000000000000000000 6eef8fd1cdde3f1d270e22c20a4d4ee6ac426b40 DollyQx <dollykumarilinux@gmail.com> 1789645254 +0530	clone: from https://github.com/DollyQx/gm--code-lab.git
+6eef8fd1cdde3f1d270e22c20a4d4ee6ac426b40 17a9856acc6ff73223a70f2840ad932478b94fcb DollyQx <dollykumarilinux@gmail.com> 1789646257 +0530	commit: chore: initialize production-ready Laravel 12 architecture and project documentation
+17a9856acc6ff73223a70f2840ad932478b94fcb 17a9856acc6ff73223a70f2840ad932478b94fcb DollyQx <dollykumarilinux@gmail.com> 1789646257 +0530	checkout: moving from main to develop
+17a9856acc6ff73223a70f2840ad932478b94fcb dd6cf27fb6312b8e49a48be79d7d686d23d564a4 DollyQx <dollykumarilinux@gmail.com> 1789647032 +0530	commit: feat: add database schema enums and user models
+dd6cf27fb6312b8e49a48be79d7d686d23d564a4 0e23d6f1bfc2f507ad6aae8dd92ebe98b2029903 DollyQx <dollykumarilinux@gmail.com> 1789647043 +0530	commit: feat: add role based authorization and policies
+0e23d6f1bfc2f507ad6aae8dd92ebe98b2029903 885b4aa26df93e1f5a21945b2be4db6869e9fe6b DollyQx <dollykumarilinux@gmail.com> 1789647055 +0530	commit: feat: add client and admin authentication controllers and views
+885b4aa26df93e1f5a21945b2be4db6869e9fe6b 0c80b86b4d6fdebb0205675ab8ef13f0ab0ba15b DollyQx <dollykumarilinux@gmail.com> 1789647069 +0530	commit: test: add authentication and authorization feature test suite
+0c80b86b4d6fdebb0205675ab8ef13f0ab0ba15b adad72365017bb332d7c72bdfdd17ffdaa9f4486 DollyQx <dollykumarilinux@gmail.com> 1789647079 +0530	commit: docs: update architecture documentation for authentication and rbac
+adad72365017bb332d7c72bdfdd17ffdaa9f4486 9af644720aac13d8875250d477de909b43ed50e4 DollyQx <dollykumarilinux@gmail.com> 1789648241 +0530	commit: feat: add core lead and catalog models
+9af644720aac13d8875250d477de909b43ed50e4 e54e3bb804b8e65d8636037f8e0234823e42797d DollyQx <dollykumarilinux@gmail.com> 1789648252 +0530	commit: feat: add project and delivery domain models
+e54e3bb804b8e65d8636037f8e0234823e42797d ef9b52f86b8cc7621c39f694dff8d2848c226121 DollyQx <dollykumarilinux@gmail.com> 1789648265 +0530	commit: feat: add quotation and billing models
+ef9b52f86b8cc7621c39f694dff8d2848c226121 ffae5c29421fcac71bd9f5b17f8ac0048e53b145 DollyQx <dollykumarilinux@gmail.com> 1789648279 +0530	commit: feat: add offer and promotion foundation
+ffae5c29421fcac71bd9f5b17f8ac0048e53b145 e9d7c4223f86e3a3b6ec4df9525010129cf86aea DollyQx <dollykumarilinux@gmail.com> 1789648296 +0530	commit: feat: add document and activity audit models
+e9d7c4223f86e3a3b6ec4df9525010129cf86aea 159731ee3f143173f573af1e729216b8a1cd7d2e DollyQx <dollykumarilinux@gmail.com> 1789648317 +0530	commit: test: add core domain relationship tests
+159731ee3f143173f573af1e729216b8a1cd7d2e 20b2c21ba8444c858fcecca46ddcdfe379fda9e3 DollyQx <dollykumarilinux@gmail.com> 1789648330 +0530	commit: docs: update core database architecture
+20b2c21ba8444c858fcecca46ddcdfe379fda9e3 6b0ad9ca5dbfddbf50f2fea762034910c8b56980 DollyQx <dollykumarilinux@gmail.com> 1789648861 +0530	commit: feat: establish public website design system
+6b0ad9ca5dbfddbf50f2fea762034910c8b56980 bf8b3ad5fb43c791310ea659498aaaa536f2c258 DollyQx <dollykumarilinux@gmail.com> 1789648880 +0530	commit: feat: add responsive navigation and footer
+bf8b3ad5fb43c791310ea659498aaaa536f2c258 6d7a2a673c2106f1df977997ce4803ff5a213d77 DollyQx <dollykumarilinux@gmail.com> 1789648949 +0530	commit: feat: create public homepage shell
+6d7a2a673c2106f1df977997ce4803ff5a213d77 ac1521644c44e8f8f60b32837f5368f9865c4ad5 DollyQx <dollykumarilinux@gmail.com> 1789648974 +0530	commit: test: verify public website routes
+ac1521644c44e8f8f60b32837f5368f9865c4ad5 9a120b79335db187c66ca3d9fc6dacc15fce4437 DollyQx <dollykumarilinux@gmail.com> 1789649866 +0530	commit: fix(public-website): resolve css asset loading, controller catalog slug fallbacks, and title formatting
+9a120b79335db187c66ca3d9fc6dacc15fce4437 3406fe51fdc78bb68e70c90ed7513ccb17f73533 DollyQx <dollykumarilinux@gmail.com> 1789651364 +0530	commit: feat: complete Phase 5A Admin CRM foundation including dashboard, client directory, and lead pipeline
+3406fe51fdc78bb68e70c90ed7513ccb17f73533 c8d4fa381e0ec8850ea1bed8e1f01bceac5d407d DollyQx <dollykumarilinux@gmail.com> 1789661820 +0530	commit: okk
+c8d4fa381e0ec8850ea1bed8e1f01bceac5d407d 3b3193c14b6c2f74f8b5d7fdb123cb2ff12bd434 DollyQx <dollykumarilinux@gmail.com> 1789662427 +0530	commit: feat(commercial): implement admin quotation management system (Phase 6A)
+3b3193c14b6c2f74f8b5d7fdb123cb2ff12bd434 0ce0f54d22d74ff3c3076004ea7e7d5290ac0328 DollyQx <dollykumarilinux@gmail.com> 1789663005 +0530	commit: feat(admin): implement Phase 6B commercial invoice management and payment tracking
+0ce0f54d22d74ff3c3076004ea7e7d5290ac0328 7bad31dd4f6e4b9bd172207acf0d74704a97f41f DollyQx <dollykumarilinux@gmail.com> 1789663553 +0530	commit: feat(billing): implement Phase 6C Razorpay payment integration, checkout signature verification, and secure webhooks with idempotency
+7bad31dd4f6e4b9bd172207acf0d74704a97f41f e4d64d0323e445ef152b086c49fb5e38badf96c2 DollyQx <dollykumarilinux@gmail.com> 1789663896 +0530	commit: test: verify razorpay end-to-end payment flow & security reconciliation
+e4d64d0323e445ef152b086c49fb5e38badf96c2 803d67404af80efca89d113f81b790ba88d920fa DollyQx <dollykumarilinux@gmail.com> 1789664526 +0530	commit: feat: implement Phase 6D payment history, receipts & financial dashboard
+803d67404af80efca89d113f81b790ba88d920fa 2bc99bb2ec833ba5435a14cc6f4d169f5c3f2e31 DollyQx <dollykumarilinux@gmail.com> 1789665347 +0530	commit: feat: implement Phase 7A Client Portal Foundation
+2bc99bb2ec833ba5435a14cc6f4d169f5c3f2e31 f3df8aa0b202e9fd6424dfb130d77f6cdb539de9 DollyQx <dollykumarilinux@gmail.com> 1789666111 +0530	commit: feat: implement Phase 7B client commercial workflow with quotations, invoices, razorpay payments, and payment history
+f3df8aa0b202e9fd6424dfb130d77f6cdb539de9 2f29f8b40c970d68fe3f45ed313e6506cd2c9a5f DollyQx <dollykumarilinux@gmail.com> 1789667026 +0530	commit: feat: Implement Phase 7C.1 Support Ticket System
+2f29f8b40c970d68fe3f45ed313e6506cd2c9a5f 92807d53c92a75c1783dd4ff36325e12a3afdeec DollyQx <dollykumarilinux@gmail.com> 1789668939 +0530	commit: okk
+92807d53c92a75c1783dd4ff36325e12a3afdeec f27038aa77125a441027510d621afeb96a6287a4 DollyQx <dollykumarilinux@gmail.com> 1789724597 +0530	commit: feat(documents): implement Phase 7C.3 document management system with private storage and RBAC isolation
+f27038aa77125a441027510d621afeb96a6287a4 0a432b13d1cf1b0afa44e597b7d6acab0721b2f8 DollyQx <dollykumarilinux@gmail.com> 1789728288 +0530	commit: feat(notifications): complete Phase 7C.4 Notifications System
+0a432b13d1cf1b0afa44e597b7d6acab0721b2f8 05740d1d895b7bd386f0094e7c106ce20e64f144 DollyQx <dollykumarilinux@gmail.com> 1789734215 +0530	commit: okok
+05740d1d895b7bd386f0094e7c106ce20e64f144 499cba6f769314e34d2fcc085d50d3c4db2c97d8 DollyQx <dollykumarilinux@gmail.com> 1789735468 +0530	commit: feat(messaging): implement Phase 7C.6 project communication & messaging system
+499cba6f769314e34d2fcc085d50d3c4db2c97d8 80761e140a9ccbf78f704d12510afbccedea4b7f DollyQx <dollykumarilinux@gmail.com> 1789737734 +0530	commit: feat(review): implement Phase 7C.7 client feedback & project sign-off workflow
+80761e140a9ccbf78f704d12510afbccedea4b7f 89ffca2753a3f705618bb38fe927c50fe740f034 DollyQx <dollykumarilinux@gmail.com> 1789739198 +0530	commit: fix(client): polish portal navigation and integration flows
+89ffca2753a3f705618bb38fe927c50fe740f034 17a9856acc6ff73223a70f2840ad932478b94fcb DollyQx <dollykumarilinux@gmail.com> 1789741105 +0530	checkout: moving from develop to main
+17a9856acc6ff73223a70f2840ad932478b94fcb b193cdeb81a0e37ba97ad416f2b3c17250584db0 DollyQx <dollykumarilinux@gmail.com> 1789741120 +0530	merge develop: Merge made by the 'ort' strategy.
+b193cdeb81a0e37ba97ad416f2b3c17250584db0 89ffca2753a3f705618bb38fe927c50fe740f034 DollyQx <dollykumarilinux@gmail.com> 1789741243 +0530	checkout: moving from main to develop
