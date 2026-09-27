@@ -96,4 +96,12 @@ class PublicWebsiteRoutesTest extends TestCase
         $this->get('/register')->assertStatus(200);
         $this->get('/admin/login')->assertStatus(200);
     }
+
+    public function test_healthz_route_returns_ok_response(): void
+    {
+        $response = $this->get('/healthz');
+
+        $response->assertStatus(200);
+        $response->assertSee('OK');
+    }
 }
