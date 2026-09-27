@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libonig-dev \
     libpq-dev \
+    libsqlite3-dev \
     unzip \
     curl \
     git \
