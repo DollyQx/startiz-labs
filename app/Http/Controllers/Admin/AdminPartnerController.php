@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\PartnerStatus;
 use App\Http\Controllers\Controller;
 use App\Models\PartnerProfile;
+use App\Services\NotificationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -72,6 +73,17 @@ class AdminPartnerController extends Controller
             $updateData['approved_at'] = now();
             $updateData['approved_by_id'] = $request->user()->id;
             $updateData['rejection_reason'] = null;
+
+            if ($partner->user) {
+                NotificationService::notifyUser(
+                    $partner->user,
+                    'system',
+                    '🎉 Partner Account Approved',
+                    "Congratulations! Your Startiz Labs partner account has been approved at a {$partner->commission_rate}% commission rate. Share your link to start earning.",
+                    route('partner.dashboard'),
+                    $partner
+                );
+            }
         } elseif ($newStatus === PartnerStatus::REJECTED) {
             $updateData['rejection_reason'] = $request->rejection_reason;
         }

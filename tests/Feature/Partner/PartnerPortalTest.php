@@ -147,6 +147,20 @@ class PartnerPortalTest extends TestCase
         $dashResponse = $this->actingAs($pendingUser)->get('/partner/dashboard');
         $dashResponse->assertStatus(200);
         $dashResponse->assertSee('Candidate Partner');
+        $dashResponse->assertSee('Partner Account Approved');
+        $dashResponse->assertSee('Commission:');
+        $dashResponse->assertSee('20%');
+        $dashResponse->assertSee('How to earn:');
+        $dashResponse->assertSee('Share your link');
+        $dashResponse->assertSee('Bring a business lead');
+        $dashResponse->assertSee('Startiz Labs closes the project');
+        $dashResponse->assertSee('You earn eligible commission');
+        $dashResponse->assertSee('Copy Link');
+        $dashResponse->assertSee('Share on WhatsApp');
+
+        // Verify in-app notification was dispatched to partner
+        $this->assertCount(1, $pendingUser->fresh()->notifications);
+        $this->assertEquals('🎉 Partner Account Approved', $pendingUser->fresh()->notifications->first()->data['title']);
     }
 
     public function test_partner_cannot_access_admin_or_client_routes(): void
