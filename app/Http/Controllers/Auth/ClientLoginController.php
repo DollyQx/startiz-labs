@@ -52,6 +52,20 @@ class ClientLoginController extends Controller
             return redirect()->intended(route('admin.dashboard'));
         }
 
+        if ($user->isPartner()) {
+            $partner = $user->partnerProfile;
+            if ($partner && $partner->status === \App\Enums\PartnerStatus::PENDING) {
+                return redirect()->route('partner.pending');
+            }
+            if ($partner && in_array($partner->status, [\App\Enums\PartnerStatus::SUSPENDED, \App\Enums\PartnerStatus::REJECTED], true)) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return back()->withErrors(['email' => 'Your partner account has been ' . $partner->status->value . '. Please contact support.']);
+            }
+            return redirect()->intended(route('partner.dashboard'));
+        }
+
         return redirect()->intended(route('client.dashboard'));
     }
 

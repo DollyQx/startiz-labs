@@ -56,6 +56,23 @@ class ClientRegisterController extends Controller
 
         event(new Registered($user));
 
+        // Attribute referral safely if active referral code is present
+        $referralService = app(\App\Services\ReferralService::class);
+        $referralCode = $referralService->getActiveReferralCode($request);
+        if ($referralCode) {
+            $referralService->attributeReferral(
+                $referralCode,
+                [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                ],
+                $user,
+                null,
+                \App\Enums\ReferralStatus::CONVERTED
+            );
+        }
+
         Auth::login($user);
 
         return redirect()->route('client.dashboard')

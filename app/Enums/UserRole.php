@@ -11,6 +11,7 @@ enum UserRole: string
     case FINANCE = 'finance';
     case SUPPORT = 'support';
     case CLIENT = 'client';
+    case PARTNER = 'partner';
 
     public function isAdminRole(): bool
     {
@@ -20,6 +21,11 @@ enum UserRole: string
     public function isClientRole(): bool
     {
         return $this === self::CLIENT;
+    }
+
+    public function isPartnerRole(): bool
+    {
+        return $this === self::PARTNER;
     }
 
     public function label(): string
@@ -32,6 +38,7 @@ enum UserRole: string
             self::FINANCE => 'Finance',
             self::SUPPORT => 'Support',
             self::CLIENT => 'Client',
+            self::PARTNER => 'Partner',
         };
     }
 }
