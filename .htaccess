@@ -1,0 +1,52 @@
+<IfModule mod_dir.c>
+    DirectorySlash Off
+</IfModule>
+
+<IfModule mod_negotiation.c>
+    Options -MultiViews -Indexes
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Prevent direct access to hidden files and dot-directories, except .well-known
+    RewriteRule "(^|/)\.(?!well-known)" - [F]
+
+    # Block access to core sensitive directories and database
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|vendor)(/|$) - [F,L,NC]
+    RewriteRule ^tests/(Feature|Unit|TestCase\.php|.*\.php) - [F,L,NC]
+
+    # Block access to internal storage folders
+    RewriteRule ^storage/(framework|logs|app/private)(/|$) - [F,L,NC]
+    RewriteRule ^storage/app(/|$) - [F,L,NC]
+
+    # Block access to root configuration and documentation files
+    RewriteRule ^(artisan|composer\.(json|lock)|package(-lock)?\.json|phpunit\.xml|vite\.config\.js|DEPLOYMENT\.md|README\.md|Dockerfile|render\.yaml|SECURITY\.md)(/|$) - [F,L,NC]
+
+    # Rewrite /storage/... requests to storage/app/public/... if it exists
+    RewriteCond %{REQUEST_URI} ^/storage/(.*)$
+    RewriteCond %{DOCUMENT_ROOT}/storage/app/public/%1 -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}/storage/app/public/%1 -d
+    RewriteRule ^storage/(.*)$ storage/app/public/$1 [L]
+
+    # Explicitly handle /tests routes (avoids collision with tests/ directory)
+    RewriteRule ^tests(/.*)?$ index.php [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Handle X-XSRF-Token Header
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

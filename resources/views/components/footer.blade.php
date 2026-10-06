@@ -53,7 +53,8 @@
                     <li><a href="{{ route('about') }}" class="hover:text-white transition-colors">About Startiz Labs</a></li>
                     <li><a href="{{ route('portfolio.index') }}" class="hover:text-white transition-colors">Portfolio & Past Work</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact Us</a></li>
-                    <li><a href="{{ config('services.partner_portal.url', '#') }}" class="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1"><span>Partner Program</span> <span class="text-[10px] bg-amber-500/20 px-1 rounded border border-amber-500/30">Join</span></a></li>
+                    <li><a href="{{ route('partners') }}" class="text-amber-400 hover:text-amber-300 font-semibold transition-colors flex items-center gap-1"><span>Partner Program</span> <span class="text-[10px] bg-amber-500/20 px-1 rounded border border-amber-500/30">20% Earn</span></a></li>
+                    <li><a href="{{ route('partner.terms') }}" class="text-slate-400 hover:text-white transition-colors">Partner Terms & Conditions</a></li>
                     <li><a href="{{ route('login') }}" class="text-blue-400 hover:text-blue-300 font-medium">Client Login Portal</a></li>
                     <li><a href="{{ route('start-project') }}" class="text-blue-400 hover:text-blue-300 font-medium">Start a Project</a></li>
                 </ul>

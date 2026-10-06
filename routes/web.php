@@ -39,6 +39,19 @@ use App\Http\Controllers\Admin\AdminProjectReviewController;
 use App\Http\Controllers\Client\ClientActivityController;
 use App\Http\Controllers\Client\ClientProjectMessageController;
 use App\Http\Controllers\Client\ClientProjectReviewController;
+use App\Http\Controllers\Auth\PartnerRegisterController;
+use App\Http\Controllers\Partner\DashboardController as PartnerDashboardController;
+use App\Http\Controllers\Partner\ReferralController as PartnerReferralController;
+use App\Http\Controllers\Partner\EarningController as PartnerEarningController;
+use App\Http\Controllers\Partner\LeaderboardController as PartnerLeaderboardController;
+use App\Http\Controllers\Partner\LinkController as PartnerLinkController;
+use App\Http\Controllers\Partner\ProfileController as PartnerProfileController;
+use App\Http\Controllers\Partner\StatusController as PartnerStatusController;
+use App\Http\Controllers\Admin\AdminPartnerController;
+use App\Http\Controllers\Admin\AdminPartnerReferralController;
+use App\Http\Controllers\Admin\AdminPartnerCommissionController;
+use App\Http\Controllers\Admin\AdminPartnerPayoutController;
+use App\Http\Controllers\Admin\AdminPartnerLeaderboardController;
 use App\Http\Controllers\Public\AboutController;
 use App\Http\Controllers\Public\ContactController;
 use App\Http\Controllers\Public\HomeController;
@@ -46,6 +59,7 @@ use App\Http\Controllers\Public\IndustryController;
 use App\Http\Controllers\Public\PortfolioController;
 use App\Http\Controllers\Public\ServiceController;
 use App\Http\Controllers\Public\StartProjectController;
+use App\Http\Controllers\Public\PartnerProgramController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,6 +87,8 @@ Route::get('/portfolio/{slug}', [PortfolioController::class, 'show'])->name('por
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/start-project', [StartProjectController::class, 'index'])->name('start-project');
+Route::get('/partners', [PartnerProgramController::class, 'index'])->name('partners');
+Route::get('/partner-terms', [PartnerProgramController::class, 'terms'])->name('partner.terms');
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +109,11 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
     Route::post('/reset-password', [ResetPasswordController::class, 'reset'])->name('password.update')->middleware('throttle:6,1');
+
+    // Partner Registration
+    Route::get('/partner/register', [PartnerRegisterController::class, 'showRegistrationForm'])->name('partner.register');
+    Route::post('/partner/register', [PartnerRegisterController::class, 'register'])->middleware('throttle:6,1');
+    Route::get('/partner/login', fn () => redirect()->route('login'))->name('partner.login');
 });
 
 // Guest Routes - Admin Authentication
@@ -101,9 +122,11 @@ Route::middleware('guest')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/login', [AdminLoginController::class, 'login'])->middleware('throttle:6,1');
 });
 
+// Authenticated Logout (Clients & Partners)
+Route::post('/logout', [ClientLoginController::class, 'logout'])->middleware('auth')->name('logout');
+
 // Protected Client Routes
 Route::middleware(['auth', 'active', 'role:client'])->group(function () {
-    Route::post('/logout', [ClientLoginController::class, 'logout'])->name('logout');
 
     // Email Verification Notice & Handlers
     Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
@@ -176,6 +199,36 @@ Route::middleware(['auth', 'active', 'role:client'])->group(function () {
     Route::get('/client/projects/{project}/review', [ClientProjectReviewController::class, 'show'])->name('client.projects.review');
     Route::post('/client/projects/{project}/review/feedback', [ClientProjectReviewController::class, 'submitFeedback'])->name('client.projects.review.feedback');
     Route::post('/client/projects/{project}/review/approve', [ClientProjectReviewController::class, 'approveSignOff'])->name('client.projects.review.approve');
+});
+
+// Partner Account Status Routes
+Route::middleware(['auth', 'active', 'role:partner'])->prefix('partner')->name('partner.')->group(function () {
+    Route::get('/pending', [PartnerStatusController::class, 'pending'])->name('pending');
+    Route::get('/suspended', [PartnerStatusController::class, 'suspended'])->name('suspended');
+});
+
+// Protected Partner Portal Routes
+Route::middleware(['auth', 'active', 'role:partner', 'partner.approved'])->prefix('partner')->name('partner.')->group(function () {
+    Route::get('/', fn () => redirect()->route('partner.dashboard'));
+    Route::get('/dashboard', [PartnerDashboardController::class, 'index'])->name('dashboard');
+
+    // Referrals & Leads
+    Route::get('/referrals', [PartnerReferralController::class, 'index'])->name('referrals.index');
+    Route::get('/referrals/{referral}', [PartnerReferralController::class, 'show'])->name('referrals.show');
+
+    // Commissions & Earnings
+    Route::get('/earnings', [PartnerEarningController::class, 'index'])->name('earnings.index');
+    Route::get('/earnings/{commission}', [PartnerEarningController::class, 'show'])->name('earnings.show');
+
+    // Leaderboard
+    Route::get('/leaderboard', [PartnerLeaderboardController::class, 'index'])->name('leaderboard');
+
+    // Referral Links
+    Route::get('/links', [PartnerLinkController::class, 'index'])->name('links');
+
+    // Profile & Payout Preferences
+    Route::get('/profile', [PartnerProfileController::class, 'show'])->name('profile');
+    Route::put('/profile', [PartnerProfileController::class, 'update'])->name('profile.update');
 });
 
 // Protected Admin CRM Routes
@@ -291,6 +344,26 @@ Route::middleware(['auth', 'active', 'role:admin,super_admin,support,project_man
     Route::get('/projects/{project}/review', [AdminProjectReviewController::class, 'show'])->name('projects.review');
     Route::post('/projects/{project}/review/request', [AdminProjectReviewController::class, 'requestReview'])->name('projects.review.request');
     Route::post('/projects/{project}/review/deliver', [AdminProjectReviewController::class, 'markFinalDelivery'])->name('projects.review.deliver');
+
+    // Admin Partner Management
+    Route::get('/partners', [AdminPartnerController::class, 'index'])->name('partners.index');
+    Route::get('/partners/{partner}', [AdminPartnerController::class, 'show'])->name('partners.show');
+    Route::patch('/partners/{partner}/status', [AdminPartnerController::class, 'updateStatus'])->name('partners.status');
+    Route::patch('/partners/{partner}/rate', [AdminPartnerController::class, 'updateCommissionRate'])->name('partners.rate');
+
+    Route::get('/partners-referrals', [AdminPartnerReferralController::class, 'index'])->name('partners.referrals');
+    Route::patch('/partners-referrals/{referral}/status', [AdminPartnerReferralController::class, 'updateStatus'])->name('partners.referrals.status');
+
+    Route::get('/partners-commissions', [AdminPartnerCommissionController::class, 'index'])->name('partners.commissions');
+    Route::post('/partners-commissions', [AdminPartnerCommissionController::class, 'store'])->name('partners.commissions.store');
+    Route::patch('/partners-commissions/{commission}/approve', [AdminPartnerCommissionController::class, 'approve'])->name('partners.commissions.approve');
+    Route::patch('/partners-commissions/{commission}/payable', [AdminPartnerCommissionController::class, 'payable'])->name('partners.commissions.payable');
+    Route::patch('/partners-commissions/{commission}/reject', [AdminPartnerCommissionController::class, 'reject'])->name('partners.commissions.reject');
+
+    Route::get('/partners-payouts', [AdminPartnerPayoutController::class, 'index'])->name('partners.payouts');
+    Route::post('/partners-payouts', [AdminPartnerPayoutController::class, 'store'])->name('partners.payouts.store');
+
+    Route::get('/partners-leaderboard', [AdminPartnerLeaderboardController::class, 'index'])->name('partners.leaderboard');
 });
 
 // Public Webhooks (Phase 6C)

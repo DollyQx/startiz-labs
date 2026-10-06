@@ -41,7 +41,7 @@ return new class extends Migration
             $table->timestamp('responded_at')->nullable();
             $table->timestamps();
 
-            $table->index(['project_sign_off_id', 'iteration_number']);
+            $table->index(['project_sign_off_id', 'iteration_number'], 'pri_sign_off_iter_idx');
         });
     }
 

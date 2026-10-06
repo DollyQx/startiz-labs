@@ -17,9 +17,9 @@
                 <a href="{{ route('portfolio.index') }}" class="hover:text-white transition-colors {{ request()->routeIs('portfolio.*') ? 'text-blue-400 font-bold' : '' }}">Portfolio</a>
                 <a href="{{ route('about') }}" class="hover:text-white transition-colors {{ request()->routeIs('about') ? 'text-blue-400 font-bold' : '' }}">About</a>
                 <a href="{{ route('contact') }}" class="hover:text-white transition-colors {{ request()->routeIs('contact') ? 'text-blue-400 font-bold' : '' }}">Contact</a>
-                <a href="{{ config('services.partner_portal.url', '#') }}" class="hover:text-amber-400 transition-colors text-amber-300 font-bold flex items-center gap-1">
+                <a href="{{ route('partners') }}" class="hover:text-amber-400 transition-colors {{ request()->routeIs('partners*') ? 'text-amber-400 font-bold' : 'text-amber-300' }} font-bold flex items-center gap-1">
                     <span>Partner</span>
-                    <span class="px-1.5 py-0.5 text-[10px] uppercase font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded">Join</span>
+                    <span class="px-1.5 py-0.5 text-[10px] uppercase font-extrabold bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded">20%</span>
                 </a>
             </nav>
 
@@ -55,6 +55,7 @@
         <a href="{{ route('portfolio.index') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 {{ request()->routeIs('portfolio.*') ? 'bg-slate-800 text-blue-400 font-bold' : '' }}">Portfolio</a>
         <a href="{{ route('about') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 {{ request()->routeIs('about') ? 'bg-slate-800 text-blue-400 font-bold' : '' }}">About</a>
         <a href="{{ route('contact') }}" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-slate-800 {{ request()->routeIs('contact') ? 'bg-slate-800 text-blue-400 font-bold' : '' }}">Contact</a>
+        <a href="{{ route('partners') }}" class="block px-3 py-2 rounded-md text-base font-semibold text-amber-300 hover:bg-slate-800 {{ request()->routeIs('partners*') ? 'bg-slate-800 text-amber-400 font-bold' : '' }}">Partner Program (20% Commission)</a>
         <div class="pt-4 border-t border-slate-800 flex flex-col gap-3">
             <a href="{{ route('login') }}" class="block text-center px-4 py-2.5 rounded-lg border border-slate-700 text-slate-200 font-semibold text-sm hover:bg-slate-800">
                 Client Login Portal

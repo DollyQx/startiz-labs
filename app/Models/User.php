@@ -65,6 +65,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Partner profile relationship.
+     */
+    public function partnerProfile(): HasOne
+    {
+        return $this->hasOne(PartnerProfile::class, 'user_id');
+    }
+
+    /**
      * Client projects relationship.
      */
     public function projects(): HasMany
@@ -178,6 +186,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role instanceof UserRole
             ? $this->role->isClientRole()
             : $this->role === UserRole::CLIENT->value;
+    }
+
+    /**
+     * Check if user is a partner account.
+     */
+    public function isPartner(): bool
+    {
+        return $this->role instanceof UserRole
+            ? $this->role->isPartnerRole()
+            : $this->role === UserRole::PARTNER->value;
     }
 
     /**

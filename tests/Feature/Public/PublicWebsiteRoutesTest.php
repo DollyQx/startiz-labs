@@ -90,6 +90,18 @@ class PublicWebsiteRoutesTest extends TestCase
         $response->assertSee('Start Your Custom Software Project');
     }
 
+    public function test_partners_landing_and_terms_routes_render(): void
+    {
+        $responseLanding = $this->get('/partners');
+        $responseLanding->assertStatus(200);
+        $responseLanding->assertSee('Earn 20% Commission by Referring Clients to Startiz Labs');
+        $responseLanding->assertSee(route('partner.register'));
+
+        $responseTerms = $this->get('/partner-terms');
+        $responseTerms->assertStatus(200);
+        $responseTerms->assertSee('Partner Program Terms & Conditions', false);
+    }
+
     public function test_existing_auth_routes_remain_functional(): void
     {
         $this->get('/login')->assertStatus(200);
