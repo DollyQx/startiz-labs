@@ -46,6 +46,7 @@ use App\Http\Controllers\Partner\EarningController as PartnerEarningController;
 use App\Http\Controllers\Partner\LeaderboardController as PartnerLeaderboardController;
 use App\Http\Controllers\Partner\LinkController as PartnerLinkController;
 use App\Http\Controllers\Partner\ProfileController as PartnerProfileController;
+use App\Http\Controllers\Partner\ResourceController as PartnerResourceController;
 use App\Http\Controllers\Partner\StatusController as PartnerStatusController;
 use App\Http\Controllers\Admin\AdminPartnerController;
 use App\Http\Controllers\Admin\AdminPartnerReferralController;
@@ -212,8 +213,13 @@ Route::middleware(['auth', 'active', 'role:partner', 'partner.approved'])->prefi
     Route::get('/', fn () => redirect()->route('partner.dashboard'));
     Route::get('/dashboard', [PartnerDashboardController::class, 'index'])->name('dashboard');
 
+    // Resources
+    Route::get('/resources', [PartnerResourceController::class, 'index'])->name('resources');
+
     // Referrals & Leads
     Route::get('/referrals', [PartnerReferralController::class, 'index'])->name('referrals.index');
+    Route::get('/referrals/create', [PartnerReferralController::class, 'create'])->name('referrals.create');
+    Route::post('/referrals', [PartnerReferralController::class, 'store'])->name('referrals.store');
     Route::get('/referrals/{referral}', [PartnerReferralController::class, 'show'])->name('referrals.show');
 
     // Commissions & Earnings

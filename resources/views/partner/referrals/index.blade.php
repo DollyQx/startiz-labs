@@ -10,7 +10,11 @@
             <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Referrals & Leads</h1>
             <p class="text-sm text-slate-500">Track all accounts attributed to your referral code <span class="font-mono font-bold text-emerald-600">{{ $partner->referral_code }}</span></p>
         </div>
-        <div>
+        <div class="flex items-center gap-2">
+            <a href="{{ route('partner.referrals.create') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-bold shadow-sm transition-colors">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Submit a Referral
+            </a>
             <a href="{{ route('partner.links') }}" class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold shadow-sm transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
                 Get Referral Links
@@ -44,10 +48,10 @@
                 <thead>
                     <tr class="bg-slate-50/75 border-b border-slate-200 text-slate-500 text-xs font-bold uppercase tracking-wider">
                         <th class="py-3.5 px-6">Reference</th>
-                        <th class="py-3.5 px-6">Lead / Client</th>
-                        <th class="py-3.5 px-6">Service Requested</th>
-                        <th class="py-3.5 px-6">Status</th>
-                        <th class="py-3.5 px-6">Attributed Date</th>
+                        <th class="py-3.5 px-6">Business / Client</th>
+                        <th class="py-3.5 px-6">Requirement</th>
+                        <th class="py-3.5 px-6">Status & Next Action</th>
+                        <th class="py-3.5 px-6">Date Submitted / Updated</th>
                         <th class="py-3.5 px-6 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -58,11 +62,15 @@
                                 #{{ $referral->reference_number }}
                             </td>
                             <td class="py-4 px-6">
-                                <div class="font-semibold text-slate-900">{{ $referral->maskedClientName() }}</div>
-                                <div class="text-xs text-slate-400 font-mono">{{ $referral->maskedClientEmail() }}</div>
+                                <div class="font-bold text-slate-900">{{ $referral->displayCompanyName() }}</div>
+                                <div class="text-xs text-slate-600 font-medium mt-0.5">{{ $referral->maskedClientName() }}</div>
+                                <div class="text-[11px] text-slate-400 font-mono">{{ $referral->maskedClientEmail() }}</div>
                             </td>
                             <td class="py-4 px-6 text-slate-600 text-xs">
-                                {{ $referral->service_requested ?? 'General Consultation' }}
+                                <div class="font-medium text-slate-900">{{ $referral->service_requested ?? 'General Consultation' }}</div>
+                                @if($referral->estimated_budget)
+                                    <div class="text-[11px] text-emerald-700 font-semibold mt-0.5">Budget: {{ $referral->estimated_budget }}</div>
+                                @endif
                             </td>
                             <td class="py-4 px-6">
                                 <span class="inline-block px-2.5 py-1 rounded-full text-xs font-semibold
@@ -73,10 +81,21 @@
                                 ">
                                     {{ $referral->status->label() }}
                                 </span>
+                                <span class="block text-[11px] text-slate-400 mt-1 font-medium">
+                                    @if($referral->status->value === 'new')
+                                        Under Discovery / Review
+                                    @elseif($referral->status->value === 'contacted')
+                                        In Scoping Call
+                                    @elseif($referral->status->value === 'converted')
+                                        Active Engagement
+                                    @else
+                                        Archived
+                                    @endif
+                                </span>
                             </td>
                             <td class="py-4 px-6 text-xs text-slate-500">
-                                {{ $referral->created_at->format('M d, Y') }}
-                                <span class="block text-[11px] text-slate-400">{{ $referral->created_at->diffForHumans() }}</span>
+                                <div class="font-medium text-slate-700">{{ $referral->created_at->format('M d, Y') }}</div>
+                                <span class="block text-[11px] text-slate-400">Updated {{ $referral->updated_at->diffForHumans() }}</span>
                             </td>
                             <td class="py-4 px-6 text-right">
                                 <a href="{{ route('partner.referrals.show', $referral) }}" class="text-xs font-bold text-emerald-600 hover:text-emerald-800">

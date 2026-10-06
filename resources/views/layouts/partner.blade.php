@@ -63,6 +63,9 @@
                         <a href="{{ route('partner.referrals.index') }}" class="px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors {{ request()->routeIs('partner.referrals.*') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             Referrals & Leads
                         </a>
+                        <a href="{{ route('partner.resources') }}" class="px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors {{ request()->routeIs('partner.resources') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                            Resources
+                        </a>
                         <a href="{{ route('partner.earnings.index') }}" class="px-3.5 py-2 text-sm font-semibold rounded-lg transition-colors {{ request()->routeIs('partner.earnings.*') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
                             Commissions & Payouts
                         </a>
@@ -117,6 +120,7 @@
         <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
             <a href="{{ route('partner.dashboard') }}" class="block px-3 py-2 text-base font-semibold rounded-lg {{ request()->routeIs('partner.dashboard') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600' }}">Dashboard</a>
             <a href="{{ route('partner.referrals.index') }}" class="block px-3 py-2 text-base font-semibold rounded-lg {{ request()->routeIs('partner.referrals.*') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600' }}">Referrals & Leads</a>
+            <a href="{{ route('partner.resources') }}" class="block px-3 py-2 text-base font-semibold rounded-lg {{ request()->routeIs('partner.resources') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600' }}">Resources</a>
             <a href="{{ route('partner.earnings.index') }}" class="block px-3 py-2 text-base font-semibold rounded-lg {{ request()->routeIs('partner.earnings.*') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600' }}">Commissions & Payouts</a>
             <a href="{{ route('partner.leaderboard') }}" class="block px-3 py-2 text-base font-semibold rounded-lg {{ request()->routeIs('partner.leaderboard') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600' }}">Leaderboard</a>
             <a href="{{ route('partner.links') }}" class="block px-3 py-2 text-base font-semibold rounded-lg {{ request()->routeIs('partner.links') ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600' }}">Referral Links</a>

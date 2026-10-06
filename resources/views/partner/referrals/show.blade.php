@@ -33,27 +33,43 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
-                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Client / Contact</span>
-                <div class="text-base font-bold text-slate-900 mt-1">{{ $referral->maskedClientName() }}</div>
-                <div class="text-xs font-mono text-slate-500 mt-1">{{ $referral->maskedClientEmail() }}</div>
-                <div class="text-xs text-slate-400 mt-1">Phone: {{ $referral->maskedClientPhone() }}</div>
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Business / Client</span>
+                <div class="text-base font-bold text-slate-900 mt-1">{{ $referral->displayCompanyName() }}</div>
+                <div class="text-xs text-slate-600 font-medium mt-1">Contact: {{ $referral->maskedClientName() }}</div>
+                <div class="text-xs font-mono text-slate-500 mt-0.5">{{ $referral->maskedClientEmail() }}</div>
+                <div class="text-xs text-slate-400 mt-0.5">Phone: {{ $referral->maskedClientPhone() }}</div>
             </div>
 
             <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
                 <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Referral Attribution</span>
                 <div class="text-sm font-semibold text-slate-900 mt-1">Code: <span class="font-mono text-emerald-600 font-bold">{{ $referral->referral_code }}</span></div>
                 <div class="text-xs text-slate-500 mt-1">Service: {{ $referral->service_requested ?? 'General Portfolio Consultation' }}</div>
+                @if($referral->estimated_budget)
+                    <div class="text-xs text-emerald-700 font-semibold mt-1">Budget: {{ $referral->estimated_budget }}</div>
+                @endif
                 @if($referral->converted_at)
                     <div class="text-xs text-emerald-600 font-bold mt-1">Converted on {{ $referral->converted_at->format('M d, Y') }}</div>
                 @endif
             </div>
 
             <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Timeline & Updates</span>
+                <div class="text-xs text-slate-700 mt-1 font-medium">Submitted: {{ $referral->created_at->format('M d, Y') }}</div>
+                <div class="text-xs text-slate-500 mt-1">Last Updated: {{ $referral->updated_at->diffForHumans() }}</div>
+                @if($referral->notes)
+                    <div class="text-[11px] text-slate-600 mt-2 p-2 bg-white rounded border border-slate-200">
+                        <strong class="block text-slate-800">Notes:</strong>
+                        {{ $referral->notes }}
+                    </div>
+                @endif
+            </div>
+
+            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
                 <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Privacy Notice</span>
                 <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                    Client contact details are obfuscated in compliance with privacy guidelines. Our sales and delivery teams handle direct client engagements.
+                    Client contact details are obfuscated in compliance with privacy guidelines. Our enterprise sales and engineering teams handle direct client engagements.
                 </p>
             </div>
         </div>

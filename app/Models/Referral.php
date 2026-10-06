@@ -20,9 +20,11 @@ class Referral extends Model
         'client_id',
         'lead_id',
         'client_name',
+        'company_name',
         'client_email',
         'client_phone',
         'service_requested',
+        'estimated_budget',
         'ip_address',
         'user_agent',
         'status',
@@ -144,5 +146,26 @@ class Referral extends Model
             return substr($digits, 0, 2) . str_repeat('*', strlen($digits) - 4) . substr($digits, -2);
         }
         return '***-***';
+    }
+
+    /**
+     * Display company or business name.
+     */
+    public function displayCompanyName(): string
+    {
+        if (! empty($this->company_name)) {
+            return $this->company_name;
+        }
+
+        if ($this->lead && ! empty($this->lead->company_name)) {
+            return $this->lead->company_name;
+        }
+
+        return '—';
+    }
+
+    public function getBusinessNameAttribute(): string
+    {
+        return $this->displayCompanyName();
     }
 }

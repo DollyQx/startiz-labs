@@ -169,4 +169,99 @@ class ReferralService
 
         return $referral;
     }
+
+    /**
+     * Submit a manual referral from an approved partner with strict validation:
+     * - Approved partner check
+     * - Self-referral prevention (email and phone)
+     * - Duplicate attribution prevention
+     * - Linked Lead and Referral creation
+     * - Initial status is NEW (no commission created)
+     */
+    public function submitManualReferral(PartnerProfile $partner, array $data): Referral
+    {
+        if (! $partner->isApproved()) {
+            throw new \DomainException('Only approved partners can submit referrals.');
+        }
+
+        $companyName = trim($data['company_name'] ?? $data['business_name'] ?? '');
+        $contactName = trim($data['contact_name'] ?? $data['client_name'] ?? '');
+        $email = strtolower(trim($data['email'] ?? $data['client_email'] ?? ''));
+        $phone = trim($data['phone'] ?? $data['client_phone'] ?? '');
+        $requirement = trim($data['requirement'] ?? $data['service_requested'] ?? '');
+        $budget = trim($data['estimated_budget'] ?? '');
+        $notes = trim($data['notes'] ?? $data['additional_notes'] ?? '');
+
+        // 1. Prevent self-referral (email)
+        if ($email && strtolower(trim($partner->user->email)) === $email) {
+            throw new \DomainException('Self-referrals are not permitted. You cannot refer yourself.');
+        }
+
+        // Prevent self-referral (phone)
+        $cleanPhone = preg_replace('/\D/', '', $phone);
+        if ($cleanPhone !== '') {
+            $partnerPhone = preg_replace('/\D/', '', (string) ($partner->phone ?? $partner->user->phone ?? ''));
+            if ($partnerPhone !== '' && $cleanPhone === $partnerPhone) {
+                throw new \DomainException('Self-referrals are not permitted. You cannot refer yourself.');
+            }
+        }
+
+        // 2. Prevent duplicate referral (email)
+        if ($email && Referral::where('client_email', $email)->exists()) {
+            throw new \DomainException('A referral with this contact email already exists in the system.');
+        }
+
+        // Prevent duplicate referral (client user)
+        $existingUser = $email ? User::where('email', $email)->first() : null;
+        if ($existingUser) {
+            if ($existingUser->id === $partner->user_id) {
+                throw new \DomainException('Self-referrals are not permitted. You cannot refer yourself.');
+            }
+            if (Referral::where('client_id', $existingUser->id)->exists()) {
+                throw new \DomainException('A referral for this client already exists in the system.');
+            }
+        }
+
+        // Prevent duplicate referral (phone)
+        if ($phone !== '' && Referral::where('client_phone', $phone)->exists()) {
+            throw new \DomainException('A referral with this contact phone number already exists in the system.');
+        }
+
+        // 3. Create Lead in CRM pipeline
+        $leadNotes = "Manual referral submitted by partner: {$partner->user->name} ({$partner->referral_code})\n"
+            . ($requirement ? "Requirement: {$requirement}\n" : '')
+            . ($budget ? "Estimated Budget: {$budget}\n" : '')
+            . ($notes ? "Notes: {$notes}\n" : '');
+
+        $lead = Lead::create([
+            'name' => $contactName,
+            'email' => $email,
+            'phone' => $phone,
+            'company_name' => $companyName,
+            'source' => 'partner_referral',
+            'status' => \App\Enums\LeadStatus::NEW,
+            'client_id' => $existingUser?->id,
+            'notes' => trim($leadNotes),
+        ]);
+
+        // 4. Create Referral
+        $compiledNotes = trim(($notes ? "{$notes}\n" : '') . ($budget ? "Estimated Budget: {$budget}" : ''));
+
+        return Referral::create([
+            'partner_id' => $partner->id,
+            'referral_code' => $partner->referral_code,
+            'client_id' => $existingUser?->id,
+            'lead_id' => $lead->id,
+            'client_name' => $contactName,
+            'company_name' => $companyName,
+            'client_email' => $email,
+            'client_phone' => $phone,
+            'service_requested' => $requirement,
+            'estimated_budget' => $budget ?: null,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+            'status' => ReferralStatus::NEW,
+            'notes' => $compiledNotes ?: null,
+        ]);
+    }
 }

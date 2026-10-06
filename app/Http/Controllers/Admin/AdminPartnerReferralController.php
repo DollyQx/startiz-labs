@@ -26,6 +26,7 @@ class AdminPartnerReferralController extends Controller
                 $q->where('reference_number', 'like', "%{$search}%")
                     ->orWhere('referral_code', 'like', "%{$search}%")
                     ->orWhere('client_name', 'like', "%{$search}%")
+                    ->orWhere('company_name', 'like', "%{$search}%")
                     ->orWhere('client_email', 'like', "%{$search}%");
             });
         }

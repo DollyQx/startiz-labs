@@ -93,12 +93,19 @@
                                 <span class="block text-[11px] font-mono text-emerald-700 font-semibold">{{ $referral->referral_code }}</span>
                             </td>
                             <td class="py-3 px-4">
-                                <div class="font-bold text-slate-900">{{ $referral->client_name ?? $referral->client?->name ?? 'Lead' }}</div>
+                                <div class="font-bold text-slate-900">{{ $referral->displayCompanyName() }}</div>
+                                <div class="text-[11px] text-slate-700 font-medium">Contact: {{ $referral->client_name ?? $referral->client?->name ?? 'Lead' }}</div>
                                 <div class="text-[11px] text-slate-500 font-mono">{{ $referral->client_email ?? $referral->client?->email ?? '—' }}</div>
                                 <div class="text-[11px] text-slate-400">{{ $referral->client_phone ?? $referral->client?->phone ?? '—' }}</div>
                             </td>
                             <td class="py-3 px-4 text-slate-600">
-                                {{ $referral->service_requested ?? 'General Inquiries' }}
+                                <div class="font-medium text-slate-900">{{ $referral->service_requested ?? 'General Inquiries' }}</div>
+                                @if($referral->estimated_budget)
+                                    <div class="text-[11px] text-emerald-700 font-semibold">Budget: {{ $referral->estimated_budget }}</div>
+                                @endif
+                                @if($referral->notes)
+                                    <div class="text-[10px] text-slate-400 mt-0.5 truncate max-w-[200px]" title="{{ $referral->notes }}">{{ $referral->notes }}</div>
+                                @endif
                             </td>
                             <td class="py-3 px-4">
                                 <form method="POST" action="{{ route('admin.partners.referrals.status', $referral) }}" class="flex items-center gap-2">

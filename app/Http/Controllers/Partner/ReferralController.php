@@ -4,12 +4,45 @@ namespace App\Http\Controllers\Partner;
 
 use App\Enums\ReferralStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Partner\StoreManualReferralRequest;
 use App\Models\Referral;
+use App\Services\ReferralService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ReferralController extends Controller
 {
+    public function create(Request $request): View
+    {
+        $partner = $request->user()->partnerProfile;
+
+        $services = [
+            'Website Development',
+            'Web Applications',
+            'Mobile Applications',
+            'E-commerce',
+            'Custom Software',
+            'Cybersecurity',
+            'Other Digital Solutions',
+        ];
+
+        return view('partner.referrals.create', compact('partner', 'services'));
+    }
+
+    public function store(StoreManualReferralRequest $request, ReferralService $referralService): RedirectResponse
+    {
+        $partner = $request->user()->partnerProfile;
+
+        try {
+            $referralService->submitManualReferral($partner, $request->validated());
+
+            return redirect()->route('partner.referrals.index')
+                ->with('status', 'Referral submitted successfully.');
+        } catch (\DomainException $e) {
+            return back()->withInput()->withErrors(['email' => $e->getMessage()]);
+        }
+    }
     public function index(Request $request): View
     {
         $partner = $request->user()->partnerProfile;
